@@ -1,0 +1,51 @@
+-- 고정 아이피 : /etc/sysconfig/network-scripts/ifcfg-eth0
+BOOTPROTO=static
+.
+.
+.
+IPADDR=192.168.1.34
+NETMASK=255.255.255.0
+GATEWAY=192.168.1.1
+
+-- 네임서버 : /etc/resolv.conf
+nameserver 192.168.1.1
+
+-- hostname 설정: /etc/sysconfig/network
+NETWORKING=yes
+HOSTNAME=lx.kickscar.co
+
+
+-- host name alias: /etc/hosts
+
+-------  강의실 아이피 대역(Windows:CentOS)---------
+강사  26:134
+용진  13:118
+성운  10:112 
+아진  254:107
+홍구  6:145
+희녕  20:132 
+성식  5:139
+희주 19:140
+형근 17:131 
+정우 22:129
+채영 15:138 
+용규 23:133
+영윤 25:141
+윤택 14:137
+종운 9:130
+중현 16:111
+종익 27:143
+
+관홍 
+대희 
+성혁 
+승완 
+경일 
+
+
+ 
+
+
+
+
+

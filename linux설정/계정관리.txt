@@ -1,0 +1,50 @@
+
+mysql 접속
+mysql -u root -p
+
+1. 데이터베이스 생성
+create database webdb;
+
+
+2. maraidb 계정설정
+
+create user'webdb'@'192.168.1.%'identified by 'webdb';
+
+3.권한주기
+grant all privileges on webdb.* to'webdb'@'192.168.1.%';
+
+
+flush privileges;
+
+
+
+
+4.사용자계정없애기
+drop user 'webdb'@'192.168.1.%';
+
+5.
+drop database webdb;
+
+
+
+////
+
+1)
+create database employees;
+
+2)
+create user 'employees'@'192.168.1.%' identified by 'employees';
+
+3)
+grant all privileges on employees.* to 'employees'@'192.168.1.%';
+
+4)
+flush privileges;
+
+
+5)
+
+cd employees_db
+
+
+mysql -u root -D employees -p < employees.sql

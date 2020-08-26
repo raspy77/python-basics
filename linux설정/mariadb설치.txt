@@ -1,0 +1,86 @@
+#su -   #루트사용자
+
+# yum install -y gcc gcc-c++ libtermcap-devel gdbm-devel zlib* libxml* freetype* libpng* libjpeg* iconv flex gmp ncurses-devel cmake.x86_64 libaio
+
+
+-- gmp install
+# yum -y install gmp-devel
+
+-- nettle install
+# wget https://ftp.gnu.org/gnu/nettle/nettle-2.7.1.tar.gz
+# tar xvfz nettle-2.7.1.tar.gz
+# ./configure --prefix=/usr/local
+# make & make install
+
+/-- gnutls install
+## yum -y install xz
+# wget https://www.gnupg.org/ftp/gcrypt/gnutls/v3.3/gnutls-3.3.30.tar.xz
+# tar xvfz gnutls-3.3.30.tar.xz  /
+
+
+01. root로 설치
+# su -
+
+02. 계정 추가
+# groupadd mysql
+# useradd -M -g mysql mysql
+
+03 소스받기  /// 소스받기먼저하고 컴파일환경설정. 12번보다 34번먼저
+# wget https://downloads.mariadb.org/interstitial/mariadb-10.1.38/source/mariadb-10.1.38.tar.gz
+# tar xvfz mariadb-10.1.38.tar.gz
+# cd mariadb-10.1.38
+
+04 컴파일 환경 설정
+# cmake -DCMAKE_INSTALL_PREFIX=/usr/local/ds/mariadb -DMYSQL_USER=mysql -DMYSQL_TCP_PORT=3307 -DMYSQL_DATADIR=/usr/local/ds/mariadb/data -DMYSQL_UNIX_ADDR=/usr/local/ds/mariadb/tmp/mariadb.sock -DINSTALL_SYSCONFDIR=/usr/local/ds/mariadb/etc -DINSTALL_SYSCONF2DIR=/usr/local/ds/mariadb/etc/my.cnf.d -DDEFAULT_CHARSET=utf8 -DDEFAULT_COLLATION=utf8_general_ci -DWITH_EXTRA_CHARSETS=all -DWITH_ARIA_STORAGE_ENGINE=1 -DWITH_XTRADB_STORAGE_ENGINE=1 -DWITH_ARCHIVE_STORAGE_ENGINE=1 -DWITH_INNOBASE_STORAGE_ENGINE=1 -DWITH_PARTITION_STORAGE_ENGINE=1 -DWITH_BLACKHOLE_STORAGE_ENGINE=1 -DWITH_FEDERATEDX_STORAGE_ENGINE=1 -DWITH_PERFSCHEMA_STORAGE_ENGINE=1 -DWITH_READLINE=1 -DWITH_SSL=bundled -DWITH_ZLIB=system
+
+-> 빌드중 에러가생기면, 캐시 지우기 ->문제해결 ->다시하기
+   rm -f CMakeCashe.txt
+-> Could NOT find GnuTLS -> yum -y install gnutls-devel 
+
+
+
+05 컴파일 및 인스톨
+# make && make install
+
+
+
+06 설치 디렉토리 권한 변경
+# chown -R mysql:mysql /usr/local/ds/mariadb
+
+
+07 기본 데이터 베이스 생성
+
+# /usr/local/ds/mariadb/scripts/mysql_install_db --no-defaults --user=mysql --datadir=/usr/local/ds/mariadb/data --basedir=/usr/local/ds/mariadb -v
+
+
+
+08 root 암호 설정
+# cp /usr/local/ds/mariadb/etc/my.cnf /etc
+# cp -R /usr/local/ds/mariadb/etc/my.cnf.d /etc
+# /usr/local/ds/mariadb/bin/mysqld_safe --skip-grant-tables &
+# ps -ef | grep mysql    (확인
+
+# /usr/local/ds/mariadb/bin/mysql -u root -p
+MariaDB [(none)]>use mysql;
+MariaDB [(none)]>update user set password = password('manager') where user = 'root';
+MariaDB [(none)]>flush privileges;
+
+
+09 서비스 등록
+# cp /usr/local/ds/mariadb/support-files/mysql.server /etc/init.d/mysqld
+# vi /etc/init.d/mysqld
+basedir=/usr/local/ds/mariadb
+datadir=/usr/local/ds/mariadb/data
+
+# chkconfig mysqld on
+
+# chkconfig --list ( level 3 확인)
+
+10.테스트
+
+# /etc/init.d/mysqld stop
+# /etc/init.d/mysqld start
+
+
+
+

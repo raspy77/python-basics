@@ -1,0 +1,69 @@
+git 설치(centos)
+
+1. zlib 설치
+1) download
+    http://www.zlib.net/fossils/zlib-1.2.8.tar.gz
+# wget http://www.zlib.net/fossils/zlib-1.2.8.tar.gz
+# tar xvzf zlib-1.2.8.tar.gz
+# cd zlib-1.2.8
+# ./configure --prefix=/usr/local
+# make
+# make install
+
+
+2. perl 라이브러리 설치
+
+# yum -y install perl-devel
+
+3. gettext 라이브러리 설치
+# yum -y install gettext
+
+4. curl-devel 설치
+
+# yum -y install curl-devel
+
+
+
+5. git 설치
+1) git download
+https://mirrors.edge.kernel.org/pub/software/scm/git/git-2.6.4.tar.gz
+# wget
+2) #tar xvzf git-2.6.4.tar.gz
+# cd git-2.6.4
+# ./configure --prefix=/usr/local/ds/git2.6.4
+# make && make install
+
+###오류 발생시 #make clean
+
+6. 
+# vi /etc/profile 
+맨밑에 패스설정. export PATH=${PATH}:/usr/local/ds/git/bin
+git2.6.4 말고 git으로 설정후
+[root@localhost ds]# ln -s /usr/local/ds/git2.6.4 /usr/local/ds/git
+# source /etc/profile
+
+## 뒤의 git이라는 파일로 링크. 다음버전 설치시 git 삭제후 위의 링크명령만다시.
+
+7.확인 
+#git --version
+
+8.git 사용자 설정(전역
+#git config --global user.name raspy77
+#git config --global user.email shk9339@naver.com
+
+9.push 비번저장(레포지토리
+ #git config credential.helper store
+#git config --global credential.helper 'cache --timeout 2592000'
+
+
+
+ex)
+[root@localhost helloworld]# git add -A
+[root@localhost helloworld]# git commit -m "java code추가"
+[root@localhost helloworld]# git push
+
+
+
+
+kickscar@gmail.com
+
