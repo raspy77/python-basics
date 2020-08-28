@@ -21,3 +21,5 @@ def my_func(i):
         print('small')
 
 my_func(20)
+
+
