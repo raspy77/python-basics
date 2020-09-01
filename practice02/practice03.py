@@ -4,3 +4,21 @@
 
 
 
+s = """We encourage everyone to contribute to Python. 
+If you still have questions after reviewing the material in this guide, 
+then the Python Mentors group is available to help guide new contributors through the process."""
+
+s = s.upper().replace(',','').replace('.','').replace('\n','')
+a = s.split(' ')
+a.sort()
+for i in a:
+    print(i)
+
+
+# 2) 각 단어의 빈도수도 함께 출력 해보세요.
+
+b = list(set(a))
+b.sort()
+for i in b:
+    print(f'{i}:{a.count(i)}')
+
