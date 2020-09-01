@@ -149,11 +149,13 @@ lines = '''1st line
 3rd line
 4th line
 '''
+
+print(lines)
 r=lines.split('\n')
 print(r)
 
 r= lines.splitlines()
-print(r)
+print(r,'a')
 
 #결합
 s16 = '&'.join(r)
