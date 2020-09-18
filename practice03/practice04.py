@@ -11,8 +11,9 @@ b = random.randrange(1, 10)
 print(a, 'X', b,'= ?')
 
 for i in range(10):
-    pass
+    print(i*a, end=' ')
 
+print('\n')
 c = int(input('answer:'))
 
 if c == (a*b):

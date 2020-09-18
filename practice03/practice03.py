@@ -9,6 +9,7 @@ arrears = [101, 203, 301, 404]
 
 
 for room in apart:
-    if room not in arrears:
-        print(f'News delivery:{room}')
+    if arrears not in room:
+        continue
+    print(f'News delivery:{room.pop()}')
 

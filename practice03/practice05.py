@@ -17,13 +17,21 @@ count = len(nums)
 #
 # 코드 작성
 #
-def sort(nums):
-    for i in range(count -1):
-        pass
-
-
+# def sort(nums):
+#     for i in range(count -1):
+#         return nums
+for i in range(0, len(nums)):
+    max = 0
+    for j in range(i, len(nums)):
+        if max < nums[j]:
+            max = nums[j]
+            index = j
+    temp = nums[i]
+    nums[i] = nums[index]
+    nums[index] = temp
 
 print("After Sort.")
+
 for num in nums:
     print(num, end=' ')
 else:
